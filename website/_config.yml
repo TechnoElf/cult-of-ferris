@@ -1,0 +1,24 @@
+title: "Cult of Ferris"
+description: "An introduction to programming with Rust"
+logo: "assets/images/logo.png"
+favicon: "assets/images/logo.png"
+baseurl: ""
+url: "http://apollo.heims-family.me"
+permalink: /:title/
+author: "TechnoElf"
+github_username: "TechnoElf"
+email: "jhjavadev@gmail.com"
+
+include: ["_pages"]
+
+plugins:
+  - jekyll-sitemap
+
+highlighter: none
+markdown: kramdown
+kramdown:
+   syntax_highlighter_opts:
+      disable : true
+sass:
+  sass_dir: _sass
+  style: compressed
