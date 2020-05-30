@@ -1,6 +1,6 @@
 */target
-website/_site
-website/.sass-cache
-website/.jekyll-cache
-website/.jekyll-metadata
-website/vendor
+docs/_site
+docs/.sass-cache
+docs/.jekyll-cache
+docs/.jekyll-metadata
+docs/vendor
