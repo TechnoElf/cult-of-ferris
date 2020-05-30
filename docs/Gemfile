@@ -1,10 +1,11 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.1.0"
+gem "github-pages", group: :jekyll_plugins
 
 group :jekyll_plugins do
-  gem 'jekyll-sitemap'
-  gem 'bootstrap', '~> 4.4.1'
+  gem 'bootstrap'
   gem 'kramdown'
   gem 'rouge'
 end
+
+
