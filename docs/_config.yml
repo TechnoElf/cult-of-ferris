@@ -2,12 +2,10 @@ title: "Cult of Ferris"
 description: "An introduction to programming with Rust"
 logo: "assets/images/logo.png"
 favicon: "assets/images/logo.png"
-baseurl: "/cult-of-ferris"
-url: "https://technoelf.github.io"
+baseurl: ""
+url: "https://cult.heims-family.me"
 permalink: /:title/
 author: "TechnoElf"
-github_username: "TechnoElf"
-email: "jhjavadev@gmail.com"
 
 include: ["_pages"]
 
