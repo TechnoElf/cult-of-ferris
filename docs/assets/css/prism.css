@@ -1,5 +1,5 @@
 /* PrismJS 1.20.0
-https://prismjs.com/download.html#themes=prism-okaidia&languages=bash+rust&plugins=line-numbers+autolinker+command-line+toolbar+copy-to-clipboard+match-braces */
+https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+clike+bash+c+rust&plugins=line-numbers+autolinker+command-line+unescaped-markup+normalize-whitespace+toolbar+copy-to-clipboard */
 /**
  * okaidia theme for JavaScript, CSS and HTML
  * Loosely based on Monokai textmate theme by http://www.monokai.nl/
@@ -202,6 +202,17 @@ pre[class*="language-"].line-numbers > code {
 	content: attr(data-prompt);
 }
 
+/* Fallback, in case JS does not run, to ensure the code is at least visible */
+[class*='lang-'] script[type='text/plain'],
+[class*='language-'] script[type='text/plain'],
+script[type='text/plain'][class*='lang-'],
+script[type='text/plain'][class*='language-'] {
+	display: block;
+	font: 100% Consolas, Monaco, monospace;
+	white-space: pre;
+	overflow: auto;
+}
+
 div.code-toolbar {
 	position: relative;
 }
@@ -267,32 +278,3 @@ div.code-toolbar > .toolbar span:focus {
 	text-decoration: none;
 }
 
-.token.punctuation.brace-hover,
-.token.punctuation.brace-selected {
-	outline: solid 1px;
-}
-
-.rainbow-braces .token.punctuation.brace-level-1,
-.rainbow-braces .token.punctuation.brace-level-5,
-.rainbow-braces .token.punctuation.brace-level-9 {
-	color: #E50;
-	opacity: 1;
-}
-.rainbow-braces .token.punctuation.brace-level-2,
-.rainbow-braces .token.punctuation.brace-level-6,
-.rainbow-braces .token.punctuation.brace-level-10 {
-	color: #0B3;
-	opacity: 1;
-}
-.rainbow-braces .token.punctuation.brace-level-3,
-.rainbow-braces .token.punctuation.brace-level-7,
-.rainbow-braces .token.punctuation.brace-level-11 {
-	color: #26F;
-	opacity: 1;
-}
-.rainbow-braces .token.punctuation.brace-level-4,
-.rainbow-braces .token.punctuation.brace-level-8,
-.rainbow-braces .token.punctuation.brace-level-12 {
-	color: #E0E;
-	opacity: 1;
-}
