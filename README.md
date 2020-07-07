@@ -16,4 +16,4 @@ Credits
 - **Hakim El Hattab et al.** for [reveal.js](https://github.com/hakimel/reveal.js/)
 - **Preet Shihn et al.** for [rough.js](https://github.com/rough-stuff/rough) and [rough notation](https://github.com/rough-stuff/rough-notation)
 - **Michael Schmidt, James DiGioia, Golmote, Jannik Zschiesche et al.** for [prism.js](https://github.com/PrismJS/prism/)
-- **Karen Rustad Toe¶ et al.** for the best mascot of any programming language, [Ferris](https://www.rustacean.net/)
+- **Karen Rustad Toelva et al.** for the best mascot of any programming language, [Ferris](https://www.rustacean.net/)
