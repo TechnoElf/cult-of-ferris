@@ -1,0 +1,997 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>The Cult of Ferris</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/ferris.css" id="theme">
+
+		<script src="dist/reveal.js"></script>
+		<script src="https://unpkg.com/roughjs@latest/bundled/rough.js"></script>
+        <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+
+		<link rel="stylesheet" href="css/prism.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>The Cult of Ferris</h1>
+					Welcome, fellow rustlings
+					<img src="images/rustacean-flat-gesture.png"></img>
+				</section>
+
+				<section>
+					<h2>Purpose of the Course</h2>
+					<ul>
+						<li class="fragment">To learn Rust</li>
+						<li class="fragment">To have fun doing it</li>
+						<li class="fragment">To learn about computers and everything related to them</li>
+						<li class="fragment">To gain practical skills</li>
+					</ul>
+				</section>
+
+				<section id="int_why_rust">
+					<h2>Why Rust?</h2>
+					<ul>
+						<li class="fragment">"Performance, Reliability, Productivity"</li>
+						<li class="fragment">It has many application areas</li>
+						<li class="fragment">It has excellent documentation</li>
+						<li class="fragment">It's a modern langauge</li>
+						<li class="fragment">It's a popular language</li>
+						<li class="fragment" id="int_why_rust_f1"><span id="int_why_rust_a1">It <em>can</em> be learned by a beginner</span></li>
+					</ul>
+					<script>{
+						let a1 = RoughNotation.annotate(document.getElementById("int_why_rust_a1"), { type: "box", padding: [-5, 5] });
+						Reveal.on("fragmentshown", event => {
+						  switch (event.fragment.id) {
+						  	case "int_why_rust_f1":
+						  		a1.show();
+						  		break;
+						  }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "int_why_rust") {
+								a1.hide();
+							}
+						});
+				  }</script>
+				</section>
+
+				<section>
+					<h1>Lesson 1</h1>
+				</section>
+
+				<section id="l1_what">
+					<h2>What is a Computer?</h2>
+					<p class="fragment" id="l1_what_f1">A <span id="l1_what_a1">machine</span></p>
+					<p class="fragment" id="l1_what_f2">An <span id="l1_what_a2">information processor</span></p>
+					<p class="fragment" id="l1_what_f3">A <span id="l1_what_a3">tool for humans</span></p>
+					<script>{
+						let a1 = RoughNotation.annotate(document.getElementById("l1_what_a1"), { type: "underline", padding: [-5, 5] });
+						let a2 = RoughNotation.annotate(document.getElementById("l1_what_a2"), { type: "underline", padding: [-5, 5] });
+						let a3 = RoughNotation.annotate(document.getElementById("l1_what_a3"), { type: "underline", padding: [-5, 5] });
+						let a = RoughNotation.annotationGroup([ a1, a2, a3 ]);
+						Reveal.on("fragmentshown", event => {
+						  switch (event.fragment.id) {
+						  	case "l1_what_f1":
+						  		a1.show();
+						  		break;
+								case "l1_what_f2":
+									a2.show();
+									break;
+								case "l1_what_f3":
+									a3.show();
+									break;
+						  }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l1_what") {
+								a.hide();
+							}
+						});
+				  }</script>
+				</section>
+
+				<section id="l1_machine">
+					<h2>The Computer as a</h2>
+					<h2><span id="l1_machine_a1">Machine</span></h2>
+					<script>{
+						let a1 = RoughNotation.annotate(document.getElementById("l1_machine_a1"), { type: "underline", padding: [-10, 5] });
+						Reveal.on("slidechanged", event => {
+							if (event.currentSlide.id == "l1_machine") {
+								a1.show();
+							} else if (event.previousSlide.id == "l1_machine") {
+								a1.hide();
+							}
+						});
+				  }</script>
+				</section>
+
+				<section id="l1_computer">
+					<h2>The Computer System</h2>
+					<canvas id="l1_computer_canvas" width="1000" height="500"></canvas>
+					<a class="fragment" id="l1_computer_f1"></a>
+					<a class="fragment" id="l1_computer_f2"></a>
+					<a class="fragment" id="l1_computer_f3"></a>
+					<a class="fragment" id="l1_computer_f4"></a>
+					<a class="fragment" id="l1_computer_f5"></a>
+					<a class="fragment" id="l1_computer_f6"></a>
+					<script>{
+						let c = document.getElementById("l1_computer_canvas");
+						let d = c.getContext('2d');
+				    let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("fragmentshown", event => {
+						  switch (event.fragment.id) {
+						  	case "l1_computer_f1":
+						  		r.rectangle(450, 200, 100, 100, { fill: 'red' });
+									d.fillText("Controller", 500, 150);
+						  		break;
+								case "l1_computer_f2":
+									r.rectangle(150, 200, 100, 100, { fill: 'green' });
+									d.fillText("Memory", 200, 150);
+						  		break;
+								case "l1_computer_f3":
+									r.rectangle(750, 200, 100, 100, { fill: 'blue' });
+									d.fillText("Peripherals", 800, 150);
+						  		break;
+								case "l1_computer_f4":
+									r.line(300, 250, 400, 250, { bowing: 3, strokeWidth: 2 });
+									r.line(300, 250, 310, 260, { strokeWidth: 2 });
+									r.line(300, 250, 310, 240, { strokeWidth: 2 });
+									r.line(400, 250, 390, 260, { strokeWidth: 2 });
+									r.line(400, 250, 390, 240, { strokeWidth: 2 });
+
+									r.line(600, 250, 700, 250, { bowing: 3, strokeWidth: 2 });
+									r.line(600, 250, 610, 260, { strokeWidth: 2 });
+									r.line(600, 250, 610, 240, { strokeWidth: 2 });
+									r.line(700, 250, 690, 260, { strokeWidth: 2 });
+									r.line(700, 250, 690, 240, { strokeWidth: 2 });
+						  		break;
+								case "l1_computer_f5":
+									d.fillText("CPU", 500, 350);
+									d.fillText("Microcontroller", 500, 380);
+						  		break;
+								case "l1_computer_f6":
+									d.fillText("Keyboard", 800, 350);
+									d.fillText("Display", 800, 380);
+									d.fillText("Toaster", 800, 410);
+						  		break;
+						  }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l1_computer") {
+								d.clearRect(0, 0, c.width, c.height);
+							}
+						});
+				  }</script>
+				</section>
+
+				<section>
+					<h2>The Transistor</h2>
+					<p class="fragment">Why?</p>
+					<ul>
+						<li class="fragment">Smaller</li>
+						<li class="fragment">Faster</li>
+						<li class="fragment">Simpler</li>
+					</ul>
+				</section>
+
+				<section>
+					<img src="images/mosfet.png"></img>
+                    <p style="font-size: x-large">Buttay, Cyril, et al. <i>Lateral MOSFET</i>. <a href="https://commons.wikimedia.org/wiki/File:Lateral_mosfet.svg">https://commons.wikimedia.org/wiki/File:Lateral_mosfet.svg</a>.</p>
+				</section>
+
+				<section>
+					<img src="images/mosfet_electron_density.gif"></img>
+                    <p style="font-size: x-large">Mehrotra, Saumitra R and Gerhard Klimeck. <i>Threshold Formation</i>. 26 August 2010, <a href="https://commons.wikimedia.org/wiki/File:Threshold_formation_nowatermark.gif">https://commons.wikimedia.org/wiki/File:Threshold_formation_nowatermark.gif</a>.</p>
+				</section>
+
+				<section>
+					<h2>Boolean Algebra</h2>
+					<p class="fragment">ON or OFF, YES or NO, 1 or 0</p>
+					<p class="fragment">Two possible states</p>
+					<p class="fragment">All functions can be implemented using just three operations</p>
+				</section>
+
+				<section>
+					<p style="font-size: larger">And</p>
+					<p style="font-size: larger">$\wedge$</p>
+					<p style="font-size: larger">(<code>& or &&</code>)</p>
+				</section>
+
+				<section>
+					<p style="font-size: larger">Or</p>
+					<p style="font-size: larger">$\vee$</p>
+					<p style="font-size: larger">(<code>| or ||</code>)</p>
+				</section>
+
+				<section>
+					<p style="font-size: larger">Not</p>
+					<p style="font-size: larger">$\neg$</p>
+					<p style="font-size: larger">(<code>!</code>)</p>
+				</section>
+
+				<section>
+					<h2>Boolean Algebra</h2>
+					<table>
+						<tr>
+							<th>$a$</th>
+							<th>$b$</th>
+							<th>$a\wedge b$</th>
+							<th>$a\vee b$</th>
+							<th>$\neg a$</th>
+						</tr>
+						<tr>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">1</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">0</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;"></td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;"></td>
+						</tr>
+					</table>
+				</section>
+
+				<section>
+					<img src="images/basic_gates.gif"></img>
+                    <p style="font-size: x-large">Pratt, Vaughan. <i>Logic Gates</i>. 27 January 2008, <a href="https://commons.wikimedia.org/wiki/File:LogicGates.GIF">https://commons.wikimedia.org/wiki/File:LogicGates.GIF</a>.</p>
+				</section>
+
+				<section>
+					<h2>Secondary Operations</h2>
+					<p style="font-size: larger">Exclusive Or</p>
+					<p style="font-size: larger">$\oplus$</p>
+					<p style="font-size: larger">(<code>^</code>)</p>
+					<p style="font-size: larger">$a\oplus b=(\neg a\wedge b)\vee (a\wedge\neg b)$</p>
+				</section>
+
+				<section>
+					<img src="images/xor.png"></img>
+					<p>$a\oplus b=(a\vee b)\wedge \neg(a\vee b)=(\neg a\wedge b)\vee (a\wedge\neg b)$</p>
+                    <p style="font-size: x-large">Officer781. <i>3 Gate XOR</i>. 5 August 2019, <a href="https://commons.wikimedia.org/wiki/File:3_gate_XOR.svg">https://commons.wikimedia.org/wiki/File:3_gate_XOR.svg</a>.</p>
+				</section>
+
+				<section>
+					<h2>Tertiary Operations</h2>
+					<p class="fragment">Addition</p>
+					<table class="fragment">
+						<tr>
+							<th>$a$</th>
+							<th>$b$</th>
+							<th>$a+b$</th>
+						</tr>
+						<tr>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">0</td>
+							<td class="fragment" style="text-align: center;">0</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">0</td>
+							<td class="fragment" style="text-align: center;">1</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">0</td>
+							<td style="text-align: center;">1</td>
+							<td class="fragment" style="text-align: center;">1</td>
+						</tr>
+						<tr>
+							<td style="text-align: center;">1</td>
+							<td style="text-align: center;">1</td>
+							<td class="fragment" style="text-align: center;">10</td>
+						</tr>
+					</table>
+					<p class="fragment">$x_1=a\oplus b, x_2=a\wedge b$</p>
+				</section>
+
+				<section>
+					<img src="images/half_adder.png"></img>
+                    <p style="font-size: x-large">inductiveload. <i>Half Adder</i>. 5 August 2006, <a href="https://commons.wikimedia.org/wiki/File:Half_Adder.svg">https://commons.wikimedia.org/wiki/File:Half_Adder.svg</a>.</p>
+				</section>
+
+				<section>
+					<h2>Notation</h2>
+					<ul>
+						<li class="fragment">Decimal <code>42</code> ($x\mod10^n$)</li>
+						<li class="fragment">Binary <code>0b00101010</code> ($x\mod2^n$)</li>
+						<li class="fragment">Hexadecimal <code>0x2a</code> ($x\mod16^n$)</li>
+						<li class="fragment">Octal <code>0o052</code> ($x\mod8^n$)</li>
+					</ul>
+				</section>
+
+				<section id="l1_information">
+					<h2>The Computer as an</h2>
+					<h2><span id="l1_information_a1">Information Processor</span></h2>
+					<script>{
+						let a1 = RoughNotation.annotate(document.getElementById("l1_information_a1"), { type: "underline", padding: [-10, 5] });
+						Reveal.on("slidechanged", event => {
+							if (event.currentSlide.id == "l1_information") {
+								a1.show();
+							} else if (event.previousSlide.id == "l1_information") {
+								a1.hide();
+							}
+						});
+				  }</script>
+				</section>
+
+				<section id="l1_capabilities">
+					<h2>What Capabilities must the Computer System have?</h2>
+					<canvas id="l1_capabilities_canvas" width="1000" height="500"></canvas>
+					<script>{
+						let c = document.getElementById("l1_capabilities_canvas");
+						let d = c.getContext('2d');
+				    let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l1_capabilities") {
+								d.clearRect(0, 0, c.width, c.height);
+
+								r.rectangle(450, 200, 100, 100, { fill: 'red' });
+								d.fillText("Controller", 500, 150);
+
+								r.rectangle(150, 200, 100, 100, { fill: 'green' });
+								d.fillText("Memory", 200, 150);
+
+								r.rectangle(750, 200, 100, 100, { fill: 'blue' });
+								d.fillText("Peripherals", 800, 150);
+
+								r.line(300, 250, 400, 250, { bowing: 3, strokeWidth: 2 });
+								r.line(300, 250, 310, 260, { strokeWidth: 2 });
+								r.line(300, 250, 310, 240, { strokeWidth: 2 });
+								r.line(400, 250, 390, 260, { strokeWidth: 2 });
+								r.line(400, 250, 390, 240, { strokeWidth: 2 });
+
+								r.line(600, 250, 700, 250, { bowing: 3, strokeWidth: 2 });
+								r.line(600, 250, 610, 260, { strokeWidth: 2 });
+								r.line(600, 250, 610, 240, { strokeWidth: 2 });
+								r.line(700, 250, 690, 260, { strokeWidth: 2 });
+								r.line(700, 250, 690, 240, { strokeWidth: 2 });
+							}
+						});
+				  }</script>
+				</section>
+
+				<section>
+					<h2>Everything is Data</h2>
+					<p class="fragment">Or, in Unix-speak: "Everything is a file"</p>
+				</section>
+
+				<section id="l1_multi_processor">
+					<h2>Extension of the Basic Computer Model</h2>
+					<canvas id="l1_multi_processor_canvas" width="1000" height="500"></canvas>
+					<a class="fragment" id="l1_multi_processor_f1"></a>
+					<a class="fragment" id="l1_multi_processor_f2"></a>
+					<script>{
+						let c = document.getElementById("l1_multi_processor_canvas");
+						let d = c.getContext('2d');
+				    let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("fragmentshown", event => {
+						  switch (event.fragment.id) {
+						  	case "l1_multi_processor_f1":
+									d.clearRect(400, 100, 200, 75);
+
+						  		r.rectangle(450, 50, 100, 100, { fill: 'red' });
+									r.rectangle(450, 350, 100, 100, { fill: 'red' });
+						  		break;
+								case "l1_multi_processor_f2":
+									d.clearRect(425, 25, 150, 150);
+									d.clearRect(425, 325, 150, 150);
+
+									r.rectangle(450, 350, 100, 100, { fill: 'purple' });
+						  		break;
+						  }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l1_multi_processor") {
+								d.clearRect(0, 0, c.width, c.height);
+
+								r.rectangle(450, 200, 100, 100, { fill: 'red' });
+								d.fillText("Controller", 500, 150);
+
+								r.rectangle(150, 200, 100, 100, { fill: 'green' });
+								d.fillText("Memory", 200, 150);
+
+								r.rectangle(750, 200, 100, 100, { fill: 'blue' });
+								d.fillText("Peripherals", 800, 150);
+
+								r.line(300, 250, 400, 250, { bowing: 3, strokeWidth: 2 });
+								r.line(300, 250, 310, 260, { strokeWidth: 2 });
+								r.line(300, 250, 310, 240, { strokeWidth: 2 });
+								r.line(400, 250, 390, 260, { strokeWidth: 2 });
+								r.line(400, 250, 390, 240, { strokeWidth: 2 });
+
+								r.line(600, 250, 700, 250, { bowing: 3, strokeWidth: 2 });
+								r.line(600, 250, 610, 260, { strokeWidth: 2 });
+								r.line(600, 250, 610, 240, { strokeWidth: 2 });
+								r.line(700, 250, 690, 260, { strokeWidth: 2 });
+								r.line(700, 250, 690, 240, { strokeWidth: 2 });
+							}
+						});
+				  }</script>
+				</section>
+
+				<section id="l1_tool">
+					<h2>The Computer as a</h2>
+					<h2><span id="l1_tool_a1">Tool for Humans</span></h2>
+					<script>{
+						let a1 = RoughNotation.annotate(document.getElementById("l1_tool_a1"), { type: "underline", padding: [-10, 5] });
+						Reveal.on("slidechanged", event => {
+							if (event.currentSlide.id == "l1_tool") {
+								a1.show();
+							} else if (event.previousSlide.id == "l1_tool") {
+								a1.hide();
+							}
+						});
+				  }</script>
+				</section>
+
+				<section>
+					<h2>We need a language as a layer of abstraction to communicate effectively with these information processors</h2>
+				</section>
+
+				<section>
+					<h2>The three Ideologies of Programming</h2>
+					<p class="fragment">Imperative</p>
+					<p class="fragment">Object-Oriented</p>
+					<p class="fragment">Functional</p>
+				</section>
+
+				<section>
+					<h2>The two Translator Personalities of Programming</h2>
+					<p class="fragment">Interpreted</p>
+					<p class="fragment">Compiled</p>
+				</section>
+
+				<section id="l1_translator">
+					<h2>The two Translator Personalities of Programming</h2>
+					<canvas id="l1_translator_canvas" width="1000" height="500"></canvas>
+					<a class="fragment" id="l1_translator_f1"></a>
+					<a class="fragment" id="l1_translator_f2"></a>
+					<script>{
+						let c = document.getElementById("l1_translator_canvas");
+						let d = c.getContext('2d');
+				    let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("fragmentshown", event => {
+						  switch (event.fragment.id) {
+						  	case "l1_translator_f1":
+									d.clearRect(175, 200, 600, 100);
+
+									r.ellipse(475, 100, 100, 100, { fill: 'green' });
+									d.fillText("Interpreter", 475, 25);
+
+									r.line(200, 200, 375, 100, { bowing: 3, strokeWidth: 2 });
+									r.line(375, 100, 375, 115, { strokeWidth: 2 });
+									r.line(375, 100, 360, 100, { strokeWidth: 2 });
+
+									r.line(575, 100, 750, 200, { bowing: 3, strokeWidth: 2 });
+									r.line(750, 200, 750, 185, { strokeWidth: 2 });
+									r.line(750, 200, 735, 200, { strokeWidth: 2 });
+						  		break;
+								case "l1_translator_f2":
+									r.ellipse(350, 400, 100, 100, { fill: 'blue' });
+									d.fillText("Compiler", 350, 325);
+									r.rectangle(550, 350, 100, 100, { fill: 'blue' });
+									d.fillText("Machine Code", 600, 325);
+
+									r.line(450, 400, 500, 400, { bowing: 3, strokeWidth: 2 });
+									r.line(500, 400, 490, 410, { strokeWidth: 2 });
+									r.line(500, 400, 490, 390, { strokeWidth: 2 });
+
+									r.line(200, 300, 250, 400, { bowing: 3, strokeWidth: 2 });
+									r.line(250, 400, 250, 385, { strokeWidth: 2 });
+									r.line(250, 400, 235, 400, { strokeWidth: 2 });
+
+									r.line(700, 400, 750, 300, { bowing: 3, strokeWidth: 2 });
+									r.line(750, 300, 750, 315, { strokeWidth: 2 });
+									r.line(750, 300, 735, 300, { strokeWidth: 2 });
+						  		break;
+						  }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l1_translator") {
+								d.clearRect(0, 0, c.width, c.height);
+
+								r.rectangle(50, 200, 100, 100, { fill: 'red' });
+								d.fillText("Source", 100, 175);
+								r.ellipse(850, 250, 100, 100, { fill: 'purple' });
+								d.fillText("Computer", 850, 175);
+
+								r.line(200, 250, 750, 250, { bowing: 3, strokeWidth: 2 });
+								r.line(750, 250, 740, 260, { strokeWidth: 2 });
+								r.line(750, 250, 740, 240, { strokeWidth: 2 });
+							}
+						});
+				  }</script>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ul>
+						<li class="fragment">A computer system can be discussed on different levels of abstraction (machine, information processor, tool)</li>
+						<li class="fragment">It is necessary to have some understanding of all levels</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ul style="font-size: xx-large">
+						<li class="fragment">Any machine that has a controller, memory and peripherals can be considered a computer (von Neumann architecture)</li>
+						<li class="fragment">Peripherals provide an interface between the physical world of humans and the information-based world of computers</li>
+						<li class="fragment">Computers are generally based on digital electronics revolving around the transistor</li>
+						<li class="fragment">Digital signals can be manipulated to create various mathematical constructs (Boolean algebra)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ul style="font-size: xx-large">
+						<li class="fragment">Using the mathematical abilities of digital circuits, it is possible to construct a general-purpose information processor</li>
+						<li class="fragment">Memory is necessary to have stateful information processors</li>
+						<li class="fragment">The controller must have the means of executing instructions sequentially</li>
+						<li class="fragment">The controller must have the means of executing instructions non-sequentially/conditionally (Turing completeness)</li>
+						<li class="fragment">Everything a computer does can be abstracted as a transformation of information</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+					<ul>
+						<li class="fragment">Large-scale processing of information is useful for humans</li>
+						<li class="fragment">There exists a great variety of programming languages based on multiple paradigms (imperative, object-oriented, functional)</li>
+						<li class="fragment">Translation of human-readable algorithms to machine-readable instructions is done through compiler or interpreter programs</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Post Scriptum: Setting up the Environment for this Course</h2>
+					<span class="fragment">
+						<p>Text editor: <a href="https://atom.io/">Atom</a>, <a href="https://code.visualstudio.com/">VS Code</a>, vim, etc.</p>
+						<p>Rust toolchain: <a href="https://rustup.rs/">rustup</a></p>
+					</p>
+					<p class="fragment">For Windows users: <a href="https://putty.org/">Putty</a> or a virtual machine with a Linux distribution (For example <a href="https://www.virtualbox.org/">Virtual Box</a> with <a href="https://ubuntu.com/download/desktop">Ubuntu</a>)</p>
+				</section>
+
+				<section>
+					<h1>Lesson 2</h1>
+				</section>
+
+                <section>
+                    <h2>Recap</h2>
+                    <p class="fragment">Computers are information processing machines</p>
+                    <p class="fragment">We need an intermediate language to interact with these information processors</p>
+                </section>
+
+                <section>
+                    <h2>The Basics (Slightly Rusty)</h2>
+                </section>
+
+                <section>
+                    <h2>The Anatomy of a Rust Project</h2>
+                    <ul>
+                        <li><code>Cargo.toml</code></li>
+                        <li><code>Cargo.lock</code></li>
+                        <li><code>src</code><ul>
+                            <li><code>main.rs</code></li>
+                            <li><code>...</code></li>
+                        </ul></li>
+                        <li><code>target</code><ul>
+                            <li><code>...</code></li>
+                        </ul></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>The Anatomy of a Rust Project</h2>
+                    <p><code>main.rs</code></p>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            println!("Hello, world!");
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Condition 1: Peripherals</h2>
+                </section>
+
+                <section>
+                    <h2>Learning to Speak</h2>
+                    <pre><code class="language-rust">
+                        println!("Hello, world!");
+                    </code></pre>
+                    <p class="fragment">The <code>println!()</code> macro displays text in the terminal</p>
+                </section>
+
+                <section>
+                    <h2>Condition 2: Memory</h2>
+                </section>
+
+                <section>
+                    <h2>Variables</h2>
+                    <pre><code class="language-rust">
+                        let x = 6;
+                        println!("x is {}", x);
+                    </code></pre>
+                    <p class="fragment">Variables are defined using the <code>let</code> keyword</p>
+                </section>
+
+                <section>
+                    <h2>Changing Memory</h2>
+                    <pre><code class="language-rust">
+                        let x = 6;
+                        println!("x is {}", x);
+                        x = 35;
+                        println!("x is {}", x);
+                    </code></pre>
+                    <img class="fragment" src="images/does_not_compile.png" style="width: 10%;"></img>
+                </section>
+
+                <section>
+                    <h2>On Mutability</h2>
+                    <pre><code class="language-rust">
+                        let mut x = 6;
+                        println!("x is {}", x);
+                        x = 35;
+                        println!("x is {}", x);
+                    </code></pre>
+                    <p class="fragment">Variables are declared changeable using the <code>mut</code> keyword</p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Types of Data</h2>
+                        <pre><code class="language-rust">
+                            let x: i32 = 6;
+                            println!("x is {}", x);
+                            let y: f64 = 3.1415;
+                            println!("y is {}", y);
+                            let z: &str = "rusty";
+                            println!("z is {}", z);
+                        </code></pre>
+                        <p class="fragment">Rust is a statically-typed language, therefore all types must be known at compile-time. Types are declared using <code>:</code></p>
+                    </section>
+
+                    <section>
+                        <h2>Aside: The Type Zoo</h2>
+                        <table>
+                            <tr>
+                                <th>Type Name</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                            <tr>
+                                <td><code>i(8, 16, 32, 64)</code></td>
+                                <td>Signed integers</td>
+                                <td>-256</td>
+                            </tr>
+                            <tr>
+                                <td><code>u(...)</code></td>
+                                <td>Unsigned integers</td>
+                                <td>1234</td>
+                            </tr>
+                            <tr>
+                                <td><code>f(32, 64)</code></td>
+                                <td>Real numbers (floating point)</td>
+                                <td>3.141</td>
+                            </tr>
+                            <tr>
+                                <td><code>str / &str</code></td>
+                                <td>Strings (text)</td>
+                                <td>"Lorem Ipsum"</td>
+                            </tr>
+                        </table>
+                    </section>
+                </section>
+
+
+                <section>
+                    <h2>But is it really?</h2>
+                    <pre class="fragment"><code class="language-rust">
+                        let x = 6;
+                        println!("x is {}", x);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>After some Rust Magic...</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            let x = 6;
+                            println!("x is {} and its type is {}", x, type_of(&x));
+                        }
+
+                        fn type_of&lt;T>(_: &T) -> &'static str {
+                            std::any::type_name::&lt;T>()
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The Compiler Knows</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            let mut x = 6;
+                            println!("x is {} and its type is {}", x, type_of(&x));
+                            x = "test";
+                            println!("x is {} and its type is {}", x, type_of(&x));
+                        }
+
+                        fn type_of&lt;T>(_: &T) -> &'static str {
+                            std::any::type_name::&lt;T>()
+                        }
+                    </code></pre>
+                    <img class="fragment" src="images/does_not_compile.png" style="width: 10%;"></img>
+                </section>
+
+                <section>
+                    <h2>The Solution: Shadowing</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            let x = 6;
+                            println!("x is {} and its type is {}", x, type_of(&x));
+                            let x = "test";
+                            println!("x is {} and its type is {}", x, type_of(&x));
+                        }
+
+                        fn type_of&lt;T>(_: &T) -> &'static str {
+                            std::any::type_name::&lt;T>()
+                        }
+                    </code></pre>
+                    <p class="fragment" style="font-size: smaller;">Variables can be redefined, even with different types. This is called shadowing</p>
+                </section>
+
+                <section>
+                    <h2>Condition 3: Controller</h2>
+                </section>
+
+                <section>
+                    <h2>Achieving Turing-Completeness</h2>
+                    <pre><code class="language-rust">
+                        let x = 6;
+                        if x == 6 {
+                            println!("x is equal to 6");
+                        }
+                    </code></pre>
+                    <p class="fragment">The <code>if</code> keyword can be used to execute code conditionally</p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Other Conditions</h2>
+                        <pre><code class="language-rust">
+                            let x = 6;
+                            if x > 6 {
+                                println!("x is greater than 6");
+                            }
+                            if x &lt; 6 {
+                                println!("x is less than 6");
+                            }
+                            if x >= 6 {
+                                println!("x is greater than or equal to 6");
+                            }
+                            if x &lt;= 6 {
+                                println!("x is less than or equal to 6");
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Aside: Boolean Algebra</h2>
+                        <p class="fragment">Boolean algebra facilitates the construction of more complex conditionals</p>
+                        <p class="fragment">Conditions can be stored using the <code>bool</code> type</p>
+                        <p class="fragment">Conditions can be manipulated using <code>&&</code>, <code>||</code> and <code>!</code></p>
+                    </section>
+
+                    <section>
+                        <h2>Aside: Boolean Algebra</h2>
+                        <pre><code class="language-rust">
+                            let x = 6;
+                            let y = "goodbye";
+                            let is_hello: bool = y == "hello";
+                            if (2 &lt;= x && x &lt;= 8) || !is_hello {
+                                println!("x is between 2 and 8 or y is not hello");
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Aside: Boolean Algebra</h2>
+                        <pre><code class="language-rust">
+                            let condition: = True;
+                            if condition {
+                                println!("Yes");
+                            } else {
+                                println!("No");
+                            }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Aside: Boolean Algebra</h2>
+                        <pre><code class="language-rust">
+                            let x = 6;
+                            if x > 6 {
+                                println!("x is greater than 6");
+                            } else if x &lt; 6 {
+                                println!("x is less than 6");
+                            } else {
+                                println!("x is 6");
+                            }
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>No Loopholes</h2>
+                    <pre><code class="language-rust">
+                        loop {
+                            println!("I must not tell lies");
+                        }
+                    </code></pre>
+                    <p class="fragment">The <code>loop</code> keyword can be used to execute code repeatedly</p>
+                </section>
+
+                <section id="l2_whats_missing">
+                    <h2>What's missing?</h2>
+                    <p class="fragment">We need an intermediate language to interact with these information processors<br>
+                    <span class="fragment" id="l2_whats_missing_f1"><span id="l2_whats_missing_a1">that is easy for humans to understand</span></span></p>
+					<script>{
+						let a1 = RoughNotation.annotate(document.getElementById("l2_whats_missing_a1"), { type: "underline", padding: [-5, 5] });
+						Reveal.on("fragmentshown", event => {
+						  switch (event.fragment.id) {
+						  	case "l2_whats_missing_f1":
+						  		a1.show();
+						  		break;
+						  }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l2_whats_missing") {
+								a1.hide();
+							}
+						});
+				    }</script>
+                </section>
+
+                <section>
+                    <h2>Loopy</h2>
+                    <pre><code class="language-rust">
+                        let mut x = 0;
+                        while x &lt;= 10 {
+                            println!("x is {}", x);
+                            x = x + 1;
+                        }
+                    </code></pre>
+                    <p class="fragment">The <code>loop</code> keyword can be used to execute code repeatedly</p>
+                </section>
+
+                <section>
+                    <h2>Pattern Matching</h2>
+                    <pre><code class="language-rust">
+                        let weather = "cloudy";
+                        match weather {
+                            "cloudy" => println!("It's cloudy today"),
+                            "sunny" => println!("It's sunny today"),
+                            "rainy" => println!("It's pouring")
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Functions: Code Reuse and Other Neat Tricks</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            say_hello();
+                        }
+
+                        fn say_hello() {
+                            println!("Hello!");
+                        }
+                    </code></pre>
+                    <p class="fragment">The <code>fn</code> keyword can be used to define a function</p>
+                </section>
+
+                <section>
+                    <h2>Arguments for Parameterisation</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            say_hello("Ferris");
+                        }
+
+                        fn say_hello(name: &str) {
+                            println!("Hello, {}!", name);
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Showing our Work</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            println!("Minutes: {}", minutes(135));
+                        }
+
+                        fn minutes(x: i32) -> i32 {
+                            return x % 60;
+                        }
+                    </code></pre>
+                    <p class="fragment">The <code>return</code> keyword can be used to return values from a function</p>
+                </section>
+
+
+                <section>
+                    <h2>When Language Fails You</h2>
+                    <pre><code class="language-rust">
+                        // I am a comment
+                        // This function calculates the answer to everything
+                        complicated_calculation();
+                    </code></pre>
+                </section>
+
+                <section>
+					<h2>Summary</h2>
+					<ul>
+						<li class="fragment">There are a infinitely many ways to achieve the same thing in Rust</li>
+						<li class="fragment">The shortest is usually the simplest and most understandable</li>
+					</ul>
+				</section>
+
+                <section>
+					<h1>Project 1</h1>
+				</section> 
+
+                <section>
+                    <h1>Bibliography</h1>
+                    <div style="font-size: xx-large">
+                        <p>Klabnik, Steve and Carol Nichols. <i>The Rust Programming Language</i>. <a href="https://doc.rust-lang.org/stable/book/">https://doc.rust-lang.org/stable/book/</a>.</p>
+                        <p>Monk, J Donald. <i>The Mathematics of Boolean Algebra</i>. 11 July 2018, <a href="https://plato.stanford.edu/entries/boolalg-math/">https://plato.stanford.edu/entries/boolalg-math/</a>.</p>
+                        <p><i>Rust by Example</i>. <a href="https://doc.rust-lang.org/stable/rust-by-example/">https://doc.rust-lang.org/stable/rust-by-example/</a>.</p>
+                        <p>Wolf, Marilyn. <i>Computers as Components</i>. Morgan Kaufmann, 2017.</p>
+                    </div>
+                </section>
+			</div>
+		</div>
+
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealNotes, RevealMath ]
+			});
+		</script>
+
+		<script src="js/prism.js"></script>
+	</body>
+</html>

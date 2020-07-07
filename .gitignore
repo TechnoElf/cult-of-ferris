@@ -1,6 +1,14 @@
+.DS_Store
 */target
 docs/_site
 docs/.sass-cache
 docs/.jekyll-cache
 docs/.jekyll-metadata
 docs/vendor
+slides/node_modules/
+slides/dist/*.map
+slides/.sass-cache
+*.iml
+*.iws
+*.eml
+*.swp
