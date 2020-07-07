@@ -969,11 +969,64 @@
 
                 <section>
 					<h1>Project 1</h1>
-				</section> 
+				</section>
+
+                <section>
+                    <h2>The Project</h2>
+                    <p>Create a text adventure</p>
+                </section> 
+
+                <section>
+                    <h2>Background</h2>
+                    <ul style="font-size: xx-large">
+                        <li class="fragment">As with many early video games, text adventures are the result of academic research</li>
+                        <li class="fragment">Developed from programs intended to process and understand natural language (early AI)</li>
+                        <li class="fragment">The first proper interactive fiction game was Colossal Cave Adventure (1975)</li>
+                        <li class="fragment">Text commands are used to interact with a virtual world and feedback is given in text form</li>
+                        <li class="fragment">The gameplay is comprable to modern RPG video games or table-top RPGs</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Inspiration</h2>
+                    <p>Interactive fiction games were traditionally set in fantasy worlds, but more modern examples have deviated from this formula<p>
+                    <p><em>Notable examples</em>: Zork, Wizard and the Princess, ESC, AI Dungeon</p>
+                </section>
+
+                <section>
+                    <h2>Getting Input</h2>
+                    <pre><code class="language-rust">
+                        use std::io::{stdin, stdout, Write};
+
+                        fn main() {
+                            print!("> ");
+                            stdout().flush().unwrap();
+                            let mut input = String::new();
+                            stdin().read_line(&mut input).unwrap();
+                            input.pop();
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>An Example</h2>
+                    <a href="https://cult.undertheprinter.com/e1">Caverns and Crabs</a>
+                    <pre class="language-bash command-line" data-user="ferris" data-host="pc" data-output="1-4"><code>
+                        > look
+                        You appear to be in a dark cave. The rocky walls are not visible, but you can feel them as you stumble around. You remember that you prepared for a situation like this and probably have flashlight in your bag.
+                        > use flashlight
+                        You fumble for the flashlight and activate it with a click.
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Lesson 3</h1>
+                </section>
 
                 <section>
                     <h1>Bibliography</h1>
                     <div style="font-size: xx-large">
+                        <p><i>Interactive fiction</i>. Wikipedia, 5 July 2020, <a href="https://en.wikipedia.org/wiki/Interactive_fiction">https://en.wikipedia.org/wiki/Interactive_fiction</a>.</p>
                         <p>Klabnik, Steve and Carol Nichols. <i>The Rust Programming Language</i>. <a href="https://doc.rust-lang.org/stable/book/">https://doc.rust-lang.org/stable/book/</a>.</p>
                         <p>Monk, J Donald. <i>The Mathematics of Boolean Algebra</i>. 11 July 2018, <a href="https://plato.stanford.edu/entries/boolalg-math/">https://plato.stanford.edu/entries/boolalg-math/</a>.</p>
                         <p><i>Rust by Example</i>. <a href="https://doc.rust-lang.org/stable/rust-by-example/">https://doc.rust-lang.org/stable/rust-by-example/</a>.</p>
