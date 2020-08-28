@@ -983,7 +983,7 @@
                         <li class="fragment">Developed from programs intended to process and understand natural language (early AI)</li>
                         <li class="fragment">The first proper interactive fiction game was Colossal Cave Adventure (1975)</li>
                         <li class="fragment">Text commands are used to interact with a virtual world and feedback is given in text form</li>
-                        <li class="fragment">The gameplay is comprable to modern RPG video games or table-top RPGs</li>
+                        <li class="fragment">The gameplay is comparable to modern RPG video games or table-top RPGs</li>
                     </ul>
                 </section>
 
@@ -1021,6 +1021,793 @@
 
                 <section>
                     <h1>Lesson 3</h1>
+                </section>
+
+                <section>
+                    <h2>There is no magic</h2>
+                    <pre><code class="language-rust">
+                        use std::io::{stdin, stdout, Write};
+
+                        fn main() {
+                            print!("> ");
+                            stdout().flush().unwrap();
+                            let mut input = String::new();
+                            stdin().read_line(&mut input).unwrap();
+                            input.pop();
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The Type Zoo</h2>
+                    <table>
+                        <tr>
+                            <th>Type Name</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><code>i(8, 16, 32, 64)</code></td>
+                            <td>Signed integers</td>
+                            <td>-256</td>
+                        </tr>
+                        <tr>
+                            <td><code>u(...)</code></td>
+                            <td>Unsigned integers</td>
+                            <td>1234</td>
+                        </tr>
+                        <tr>
+                            <td><code>f(32, 64)</code></td>
+                            <td>Real numbers (floating point)</td>
+                            <td>3.141</td>
+                        </tr>
+                        <tr>
+                            <td><code>str / &str<span class="fragment"> / String</span></code></td>
+                            <td>Strings (text)</td>
+                            <td>"Lorem Ipsum"</td>
+                        </tr>
+                     </table>
+                </section>
+
+                <section>
+                    <h2>To str or not to str</h2>
+                    <pre><code class="language-rust">
+                        let mut x: String = "Not a str& anymore".to_string();
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Paraphrasing</h2>
+                    <pre><code class="language-rust">
+                        let mut x: String = "Not a str& anymore".to_string();
+                        x.push_str(". We're a String now.");
+                        // Add emphasis
+                        x.pop();
+                        x.push('!');
+                        println!("{}", x);
+                    </code></pre>
+                    <p>Further reading: <a href="https://doc.rust-lang.org/std/string/struct.String.html">std::string::String</a></p>
+                </section>
+
+                <section>
+                    <h2>Generalising: Vectors</h2>
+                    <pre><code class="language-rust">
+                        let mut x: Vec&lt;i32> = Vec::new();
+                        x.push(-1);
+                        x.push(0);
+                        x.push(1);
+                        println!("{:?}", x);
+                    </code></pre>
+                    <p>Further reading: <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">std::vec::Vec</a></p>
+                </section>
+
+                <section id="l3_pointers">
+                    <h2>On Memory</h2>
+					<canvas id="l3_pointers_canvas" width="1000" height="500"></canvas>
+					<a class="fragment" id="l3_pointers_f1"></a>
+					<a class="fragment" id="l3_pointers_f2"></a>
+					<script>{
+						let c = document.getElementById("l3_pointers_canvas");
+						let d = c.getContext('2d');
+				        let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("fragmentshown", event => {
+						    switch (event.fragment.id) {
+						  	    case "l3_pointers_f1":
+                                    r.rectangle(450, 200, 100, 100, { fill: 'red' });
+								    d.fillText("Stack", 500, 150);
+								    d.fillText("Pointer", 500, 350);
+								    d.fillText("Length", 500, 380);
+								    d.fillText("Capacity", 500, 410);
+
+								    r.line(300, 250, 400, 250, { bowing: 3, strokeWidth: 2 });
+								    r.line(400, 250, 390, 260, { strokeWidth: 2 });
+								    r.line(400, 250, 390, 240, { strokeWidth: 2 });
+						  		    break;
+								case "l3_pointers_f2":
+									r.rectangle(750, 200, 100, 100, { fill: 'blue' });
+								    d.fillText("Heap", 800, 150);
+								    d.fillText("Data", 800, 350);
+
+									r.line(600, 250, 700, 250, { bowing: 3, strokeWidth: 2 });
+								    r.line(700, 250, 690, 260, { strokeWidth: 2 });
+								    r.line(700, 250, 690, 240, { strokeWidth: 2 });
+						  		    break;
+						    }
+						});
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l3_pointers") {
+								d.clearRect(0, 0, c.width, c.height);
+
+                                r.rectangle(150, 200, 100, 100, { fill: 'green' });
+								d.fillText("Variable", 200, 150);
+							}
+						});
+				    }</script>
+                </section>
+
+                <section id="l3_deeper">
+                    <h2>Digging Deeper</h2>
+                    <canvas id="l3_deeper_canvas" width="1000" height="500"></canvas>
+					<script>{
+						let c = document.getElementById("l3_deeper_canvas");
+						let d = c.getContext('2d');
+				        let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l3_deeper") {
+								d.clearRect(0, 0, c.width, c.height);
+
+                                r.rectangle(150, 100, 100, 100, { fill: 'green' });
+								d.fillText("x", 200, 155);
+                                r.rectangle(150, 300, 100, 100, { fill: 'green' });
+                                d.fillText("y", 200, 355); 
+
+                                r.rectangle(450, 100, 100, 100, { fill: 'red' });
+                                r.rectangle(450, 300, 100, 100, { fill: 'red' });
+                                d.fillText("Stack", 500, 50);
+
+                                r.line(300, 150, 400, 150, { bowing: 3, strokeWidth: 2 });
+                                r.line(400, 150, 390, 160, { strokeWidth: 2 });
+                                r.line(400, 150, 390, 140, { strokeWidth: 2 }); 
+
+                                r.line(300, 350, 400, 350, { bowing: 3, strokeWidth: 2 });
+                                r.line(400, 350, 390, 360, { strokeWidth: 2 });
+                                r.line(400, 350, 390, 340, { strokeWidth: 2 });
+
+                                r.rectangle(750, 200, 100, 100, { fill: 'blue' });
+								d.fillText("Heap", 800, 150);
+
+                                r.line(600, 350, 700, 300, { bowing: 3, strokeWidth: 2 });
+								r.line(700, 300, 700, 315, { strokeWidth: 2 });
+								r.line(700, 300, 685, 300, { strokeWidth: 2 });
+
+                                r.line(600, 150, 700, 200, { bowing: 3, strokeWidth: 2 });
+								r.line(700, 200, 700, 185, { strokeWidth: 2 });
+								r.line(700, 200, 685, 200, { strokeWidth: 2 });
+							}
+						});
+				    }</script>
+                </section>
+
+                <section>
+                    <h2>This is where the "Fun" begins</h2>
+                    <ul>
+                        <li class="fragment">borrowck prevents programmers from creating race conditions</li>
+                        <li class="fragment">To facilitate this, Rust uses the concepts of ownership, borrowing, copying/cloning, moving and mutability</li>
+                        <li class="fragment">Our intentions related to these must be defined explicitly</li>
+                    <ul>
+                </section>
+
+                <section>
+                    <h2>Why not move?</h2>
+                    <pre><code class="language-rust">
+                        let x: String = "Some value".to_string();
+                        println!("{}", x);
+                        let y = x;
+                        println!("{}", y);
+                        // println!("{}", x);
+                    </code></pre>
+                </section>
+
+                <section id="l3_move">
+                    <h2>Mechanics of Movement</h2>
+                    <canvas id="l3_move_canvas" width="1000" height="500"></canvas>
+					<a class="fragment" id="l3_move_f1"></a>
+					<a class="fragment" id="l3_move_f2"></a>
+					<script>{
+						let c = document.getElementById("l3_move_canvas");
+						let d = c.getContext('2d');
+				        let r = rough.canvas(c);
+						d.font = "30px cutiveMono";
+						d.textAlign = "center";
+						Reveal.on("slidechanged", event => {
+							if (event.previousSlide.className == "past" && event.currentSlide.id == "l3_move") {
+						        d.font = "30px cutiveMono";
+								d.clearRect(0, 0, c.width, c.height);
+
+                                r.rectangle(150, 100, 100, 100, { fill: 'green' });
+								d.fillText("x", 200, 155);
+
+                                r.rectangle(450, 100, 100, 100, { fill: 'red' });
+                                d.fillText("Stack", 500, 50);
+
+                                r.line(300, 150, 400, 150, { bowing: 3, strokeWidth: 2 });
+                                r.line(400, 150, 390, 160, { strokeWidth: 2 });
+                                r.line(400, 150, 390, 140, { strokeWidth: 2 }); 
+
+                                r.line(600, 150, 700, 200, { bowing: 3, strokeWidth: 2 });
+								r.line(700, 200, 700, 185, { strokeWidth: 2 });
+								r.line(700, 200, 685, 200, { strokeWidth: 2 });
+
+                                r.rectangle(750, 200, 100, 100, { fill: 'blue' });
+								d.fillText("Heap", 800, 150);
+							}
+						});
+                        Reveal.on("fragmentshown", event => {
+						    switch (event.fragment.id) {
+						  	    case "l3_move_f1":
+									r.rectangle(150, 300, 100, 100, { fill: 'green' });
+                                    r.rectangle(450, 300, 100, 100, { fill: 'red' });
+                                    d.fillText("y", 200, 355);
+
+                                    r.line(300, 350, 400, 350, { bowing: 3, strokeWidth: 2 });
+                                    r.line(400, 350, 390, 360, { strokeWidth: 2 });
+                                    r.line(400, 350, 390, 340, { strokeWidth: 2 });
+
+                                    r.line(600, 350, 700, 300, { bowing: 3, strokeWidth: 2 });
+								    r.line(700, 300, 700, 315, { strokeWidth: 2 });
+								    r.line(700, 300, 685, 300, { strokeWidth: 2 });
+
+						  		    break;
+                                case "l3_move_f2":
+									d.clearRect(290, 130, 120, 50);
+									d.clearRect(590, 140, 120, 70);
+						            d.font = "20px cutiveMono";
+								    d.fillText("Invalidated", 350, 155);
+						  		    break;
+						    }
+						});
+				    }</script>
+                </section>
+
+                <section>
+                    <h2>The Laws of Borrowck: One Borrow</h2>
+                    <pre><code class="language-rust">
+                        let x: String = "Some value".to_string();
+                        let x_borrowed = &x;
+                        // Will not work: x_borrowed.push_str(" modified");
+                        println!("{}", x_borrowed);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The Laws of Borrowck: Two Borrows</h2>
+                    <pre><code class="language-rust">
+                        let x: String = "Some value".to_string();
+                        let x_borrowed = &x;
+                        println!("{}", x_borrowed);
+                        let x_borrowed_again = &x;
+                        println!("{}", x_borrowed_again);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The Laws of Borrowck: Mutable Borrow</h2>
+                    <pre><code class="language-rust">
+                        let mut x: String = "Some value".to_string();
+                        let x_borrowed = &mut x;
+                        x_borrowed.push_str(" modified");
+                        println!("{}", x_borrowed);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The Laws of Borrowck: Two Mutable Borrows?</h2>
+                    <pre><code class="language-rust">
+                        let mut x: String = "Some value".to_string();
+                        let x_borrowed = &mut x;
+                        println!("{}", x_borrowed);
+                        let x_borrowed_again = &mut x;
+                        println!("{}", x_borrowed_again);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The Laws of Borrowck: Mutable and Immutable Borrows?</h2>
+                    <pre><code class="language-rust">
+                        let mut x: String = "Some value".to_string();
+                        let x_borrowed = &x;
+                        println!("{}", x_borrowed);
+                        let x_borrowed_mut = &mut x;
+                        println!("{}", x_borrowed_again);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Why not clone?</h2>
+                    <pre><code class="language-rust">
+                        let mut x: String = "Some value".to_string();
+                        println!("{}", x);
+                        let y = x.clone();
+                        x.push_str(" modified");
+                        println!("{}", y);
+                        println!("{}", x);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Last, but not least: Copy</h2>
+                    <pre><code class="language-rust">
+                        let x: i32 = 42;
+                        println!("{}", x);
+                        let mut y = x;
+                        y = y + 27;
+                        println!("{}", y);
+                        println!("{}", x);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Applications: Scope</h2>
+                        <ul>
+                            <li class="fragment">Scope is defined using blocks</li>
+                            <li class="fragment">All variables are only valid within their scope</li>
+                            <li class="fragment">Memory is freed automatically when the scope of a variable ends (RAII)</li>
+                        <ul>
+                    </section>
+
+                    <section>
+                        <h2>Applications: Scope</h2>
+                        <pre><code class="language-rust">
+                            {
+                                let in_scope: String = "Scope".to_string();
+                                println!("{}", in_scope);
+                            }
+
+                            // println!("{}", in_scope);
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Applications: Scope</h2>
+                        <pre><code class="language-rust">
+                            let mut x: String = "Hello".to_string();
+                            println!("{}", x);
+
+                            {
+                                let x_borrowed = &mut x;
+                                x_borrowed.push_str(", world");
+                                println!("{}", x_borrowed);
+                            }
+
+                            // println!("{}", x_borrowed); &lt;- This will not work!
+
+                            {
+                                let x_borrowed_again = &mut x;
+                                x_borrowed_again.push_str("!");
+                                println!("{}", x_borrowed_again);
+                            }
+
+                            println!("{}", x);
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Applications: Scope</h2>
+                        <pre><code class="language-rust">
+                            let outside_scope: &str;
+
+                            {
+                                let in_scope: String = "Scope".to_string();
+                                outside_scope = &in_scope;
+                            }
+
+                            println!("{}", outside_scope);
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Applications: Functions</h2>
+                    <pre><code class="language-rust">
+                        fn algo(change_this: &mut String, using_this: &str) {
+                            change_this.push_str(using_this);
+                            change_this.push_str(". And again: ");
+                            change_this.push_str(using_this);
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Just sufficiently advanced technology</h2>
+                    <pre><code class="language-rust">
+                        use std::io::{stdin, stdout, Write};
+
+                        fn main() {
+                            print!("> ");
+                            stdout().flush().unwrap();
+                            let mut input = String::new();
+                            stdin().read_line(&mut input).unwrap();
+                            input.pop();
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Lesson 4</h1>
+                </section>
+
+                <section>
+                    <h2>Structs</h2>
+                    <pre><code class="language-rust">
+                        struct Player {
+                            name: String,
+                            location: i32,
+                            hunger: u8,
+                            score: u64
+                        }
+
+                        fn main() {
+                            // Uses Player
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Instantiating Structs</h2>
+                    <pre><code class="language-rust">
+                        let player_one = Player {
+                            name: "Lloydb".to_string(),
+                            location: 0,
+                            hunger: 100,
+                            score: 0
+                        };
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Using Structs</h2>
+                    <pre><code class="language-rust">
+                        let mut player_one = ...;
+                        player_one.score = player_one.score + 100; // player_one.score += 100;
+                        player_one.location = 10;
+                        println!("{}", player_one.score);
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>"Moving" Structs</h2>
+                    <p class="fragment">The laws of borrowing apply</p>
+                    <pre class="fragment"><code class="language-rust">
+                        fn main() {
+                            let mut player_one = ...;
+                            move_player(&mut player_one, 20);
+                            println!("{}", player_one.hunger);
+                        }
+
+                        fn move_player(player: &mut Player, destination: i32) {
+                            player.hunger -= (destination - player.location).abs() as u8;
+                            player.location = destination;
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Moving Structs</h2>
+                    <pre><code class="language-rust">
+                        fn main() {
+                            let player_one = ...;
+                            eat_player(player_one);
+                            // println("{}", player_one.name); - The player is no more
+                        }
+
+                        fn eat_player(player: Player) {
+                            println!("Consuming {}", player.name);
+                        }
+                    </code></pre>
+                </section> 
+
+                <section>
+                    <h2>Debugging Structs</h2>
+                    <pre><code class="language-rust">
+                        #[derive(Debug)]
+                        struct Player {
+                            ...
+                        }
+
+                        fn main() {
+                            let player_one = ...;
+                            // println!("{}", player_one);
+                            println!("{:#?}", player_one);
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Enumerations</h2>
+                    <pre><code class="language-rust">
+                        enum Location {
+                            CaveOfFerris,
+                            MysticalForrest,
+                            RustlingVillage,
+                            CrustaceanSwamp
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Enumerations</h2>
+                    <pre><code class="language-rust">
+                        #[derive(Debug)]
+                        enum Location {
+                            CaveOfFerris,
+                            MysticalForrest,
+                            RustlingVillage,
+                            CrustaceanSwamp
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Matchmaking</h2>
+                    <pre><code class="language-rust">
+                        let location = Location::CaveOfFerris;
+                        match location {
+                            Location::RustlingVillage | Location::CaveOfFerris => println!("You feel safe."),
+                            _ => println!("You feel like you are being watched...")
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>The power of types - You're a wizard, Harry!</h2>
+                    <pre><code class="language-rust">
+                        enum Item {
+                            Wallet(f32),
+                            Compass,
+                            MysteriousGadget(GadgetItem),
+                            Sword(u32)
+                        }
+
+                        struct GadgetItem {
+                            uses: u32,
+                            hidden_feature: bool,
+                            owner: String
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Polymorphism</h2>
+                    <pre><code class="language-rust">
+                        let item = Item::Wallet(63.50);
+                        match item {
+                            Item::Wallet(capital) => println!("You have a wallet with ${}", capital),
+                            Item::Compass => println!("You have a compass"),
+                            Item::MysteriousGadget(gadget) => println!("You have some sort of ancient gadget. A label on it reads {}", gadget.owner),
+                            Item::Sword(durability) => {
+                                if durability < 50 {
+                                    println!("You have a nearly broken sword");
+                                } else {
+                                    println!("You have a sword");
+                                } 
+                            }
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Bonus Data: HashMaps</h2>
+                    <pre><code class="language-rust">
+                        use std::collections::HashMap;
+
+                        fn main() {
+                            let mut sindarin_dictionary: HashMap&lt;String, String> = HashMap::new();
+                            sindarin_dictionary.insert("air".to_string(), "gwilith".to_string());
+                            sindarin_dictionary.insert("tree".to_string(), "nimloth".to_string());
+                            sindarin_dictionary.insert("world".to_string(), "ambar".to_string());
+                            println!("\'{}\' in elvish is \'{}\'", "tree", sindarin_dictionary["tree"]);
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Lesson 5</h1>
+                </section>
+
+                <section>
+                    <h2>Imagine actually writing real programs in Rust...</h2>
+                    <ul>
+                        <li>Software can get quite big quite fast (as you probably already experienced)</li>
+                        <li>Splitting the project into logical sections will increase maintainability (along with a bunch of other nice bonuses)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>The organisational tools of Rust</h2>
+                    <ul>
+                        <li>Packages - Projects</li>
+                        <li>Crates - Libraries</li>
+                        <li>Modules - Groupings</li>
+                    <ul>
+                </section>
+
+                <section>
+					<h2>Setting up the Environment for this Course</h2>
+					<span class="fragment">
+						<p>Text editor: <a href="https://atom.io/">Atom</a>, <a href="https://code.visualstudio.com/">VS Code</a>, vim, etc.</p>
+						<p>Rust toolchain: <a href="https://rustup.rs/">rustup</a></p>
+					</p>
+				</section>
+
+                <section>
+                    <h2>The anatomy of a Rust project</h2>
+                    <ul>
+                        <li><code>Cargo.toml</code></li>
+                        <li><code>Cargo.lock</code></li>
+                        <li><code>src</code><ul>
+                            <li><code>main.rs</code> (\/)</li>
+                            <li><code>...</code></li>
+                        </ul></li>
+                        <li><code>target</code><ul>
+                            <li><code>debug</code><ul>
+                                <li><code>cool_package</code> (binary crate)</li>
+                                <li><code>...</code></li>
+                            </ul></li>
+                        </ul></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Fix your sarcasm module</h2>
+                    <pre><code class="language-rust">
+                        mod sarcasm {
+                            pub fn programmer() {
+                                println!("I absoultely love C++ template metaprogramming");
+                            }
+                        }
+
+                        fn main() {
+                            sarcasm::programmer();
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Paths are like... paths</h2>
+                    <ul>
+                        <li><code>src</code><ul>
+                            <li><code>main.rs</code></li>
+                            <li><code>sarcasm.rs (mod sarcasm { ... })</code></li>
+                            <li><code>...</code></li>
+                        </ul></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>sarcasm.rs</h2>
+                    <pre><code class="language-rust">
+                        pub fn programmer() {
+                            println!("I absoultely love C++ template metaprogramming");
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>main.rs</h2>
+                    <pre><code class="language-rust">
+                        mod sarcasm;
+                        use sarcasm::programmer;
+
+                        fn main() {
+                            programmer();
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Modules in modules (in crates)</h2>
+                    <ul>
+                        <li><code>src</code><ul>
+                            <li><code>main.rs</code> (main crate \/)</li>
+                            <li><code>sarcasm.rs</code> (sarcasm crate \/)</li>
+                            <li><code>sarcasm</code><ul>
+                                <li><code>political.rs</code></li>
+                                <li><code>...</code></li>
+                            </ul></li>
+                            <li><code>...</code></li>
+                        </ul></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>sarcasm.rs</h2>
+                    <pre><code class="language-rust">
+                        pub mod political;
+
+                        pub fn programmer() {
+                            println!("I absoultely love C++ template metaprogramming");
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>main.rs</h2>
+                    <pre><code class="language-rust">
+                        mod sarcasm;
+                        use sarcasm::programmer;
+                        use sarcasm::political::*;
+
+                        fn main() {
+                            programmer();
+                            alternative_facts();
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Great artists steal (or use crates.io)</h2>
+                    <pre><code class="language-rust">
+                        [package]
+                        name = "caverns-and-crabs"
+                        version = "0.1.0"
+                        authors = ["TechnoElf &lt;technoelf@undertheprinter.com>"]
+                        edition = "2018"
+
+                        [dependencies]
+                        rand = "0.7.3"
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Randy random</h2>
+                    <pre><code class="language-rust">
+                        use rand::random;
+
+                        fn main() {
+                            println!("Printing 10 random numbers...");
+                            for i in 0..10 {
+                                let random_int: i32 = random();
+                                println!("{}: {}", i, random_int);
+                            }
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Bonus Data: Error (not) handling</h2>
+                    <pre><code class="language-rust">
+                        use rand::random;
+
+                        fn main() {
+                            for i in 0..10 {
+                                let random_int: u8 = random();
+                                if i > 100 {
+                                    panic!("AAAAAHHHHHHH");
+                                }
+                            }
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Lesson 6</h1>
+                </section>
+
+                <section>
+                    <h2>Option</h2>
+                </section>
+
+                <section>
+                    <h2>Matching against an Option</h2>
+                </section>
+
+                <section>
+                    <h2>if let</h2>
                 </section>
 
                 <section>
